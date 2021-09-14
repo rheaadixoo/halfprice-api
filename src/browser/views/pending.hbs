@@ -1,0 +1,252 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=UTF-8" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap">
+
+  <title>Pay</title>
+  <style>
+ 
+ body {
+    font-family: 'Rubik', sans-serif!important;
+}
+
+      .payment-c-wraper {
+text-align: center;
+}
+.payment-c-wraper h2 {
+font-weight: normal;
+font-size: 24px;
+line-height: 33px;
+color: #4F4F4F;
+}
+.payment-c-wraper p{
+font-weight: normal;
+font-size: 14px;
+line-height: 17px;
+text-align: center;
+color: #333333;
+margin-top: 35px;
+margin-bottom: 15px;
+}
+.payment-c-wraper p span {
+font-weight: 700;
+color: #1264AD;
+}
+.payment-c-wraper p.transaction-txt {
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 24px;
+text-align: center;
+color: #1264AD;
+}
+.payment-success-section {
+margin-top: 80px;
+padding: 40px;
+padding-top: 80px;
+}
+
+
+
+@media all and (max-width: 600px) { 
+.payment-success-section {
+    padding: 15px;
+}
+
+   
+    .payment-success-section a{
+        margin-top: 20px;
+        cursor: pointer;
+    }
+}
+.payment-c-wraper {
+    text-align: center;
+    }
+    .payment-c-wraper h2 {
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 33px;
+    color: #4F4F4F;
+    }
+    .payment-c-wraper p{
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #333333;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    }
+    .payment-c-wraper p span {
+    font-weight: 700;
+    color: #1264AD;
+    }
+    .payment-c-wraper p.transaction-txt {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: center;
+    color: #1264AD;
+    }
+    .payment-success-section {
+    margin-top: 80px;
+    padding: 40px;
+    padding-top: 80px;
+    }
+ 
+
+        .payment-success-section a {
+            max-width: 100px;
+            margin: auto;
+            margin-top: 80px;
+            cursor: pointer;
+        }
+
+
+    @media all and (max-width: 600px) { 
+    .payment-success-section {
+        padding: 15px;
+    }
+
+      
+        .payment-success-section a{
+            margin-top: 20px;
+        }
+
+    }
+    .btn-border {
+  min-width: 165px;
+  height: 33px;
+  background: #fff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 50px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #1264AD;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #1264AD;
+  text-decoration: none;
+}
+
+/* header */
+
+.logo {
+    width: 120px;
+    height: 72px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .logo img {
+    max-width: 100%;
+  }
+
+  
+.header{
+    background-color: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    min-height: 72px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 999;
+}
+ .header-container {
+    max-width: 100%; 
+    padding: 0 15px; 
+    
+}
+
+.m-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rr-logo {
+  margin-left: 38px;
+  width: 92px;
+}
+.order-number{
+position: absolute;
+left: 74.03%;
+
+top: 38.89%;
+bottom: 31.94%;
+
+font-family: Rubik;
+font-style: normal;
+font-weight: bold;
+font-size: 18px;
+line-height: 21px;
+
+color: #4F4F4F;
+}
+
+
+  </style>
+</head>
+
+<body>
+
+ 
+    <div class="header">
+        <div class="header-container">
+           <div class="row">
+             <div class="col-md-3 col-12 m-header">
+               <div class="logo" >
+                 <img src="{{url}}/assets/images/logo.png" />
+               </div>
+              
+             </div>
+             <div class="col-md-9 col-12 d-block d-md-block d-lg-block d-sm-block">
+             <div class="ecart"  >
+                 <div class="order-number">Order ID: {{orderNumber}}</div>
+               </div>
+             </div>
+           </div>
+         </div>
+        </div>
+
+    <section class="payment-success-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="payment-c-wraper">
+                        <i><img src="{{url}}/assets/images/paymentpending.svg"></i>
+                        <h2>Awaiting payment confirmation.</h2>
+                        <p>We are verifying your payment of <span>₹{{amount}}</span> towards your booking!<br> Please wait for 15 minutes before trying again. A confirmation<br> email will be sent to you if we are able to confirm your payment.</p>
+                        <p class="transaction-txt">Trsansaction ID :  {{txnToken}}<br>
+                            Booking ID : {{orderNumber}} </p>
+                    </div>
+                </div>
+              
+                <div class="col-md-12">
+                     <a href="{{url}}" class="btn-border" role="button">Home</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+</body>
+
+</html>
+
+
