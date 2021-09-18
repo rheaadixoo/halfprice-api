@@ -20,6 +20,7 @@ import { ProductService } from '../product/product.service';
 import * as _ from 'lodash';
 import { CartService } from '../cart/cart.service';
 import { CartDetailsService } from '../cart-details/cart-details.service';
+import { MasterOrderService } from '../master-order/master-order.service';
 
 @Injectable()
 export class OrderService {
@@ -35,7 +36,8 @@ export class OrderService {
     private cartService: CartService,
     private cartDetailsService:CartDetailsService,
     private notificationService: CanNotificationService,
-    private productService:ProductService
+    private productService:ProductService,
+    private masterOrderService: MasterOrderService
   ) {}
 
   async create(order: OrderDto): Promise<any> {
@@ -63,10 +65,14 @@ export class OrderService {
         order.totalAmount = totalAmountRes
         order.totalAmount = 1
       }
+      this.createSupplierOrders(order);
       if (order.payLater) {
-        return this.orderRepository.create<Order>(order);
+        return this.masterOrderService.create(order)
+        // return this.orderRepository.create<Order>(order);
       }{
-        const createdOrder = await this.orderRepository.create<Order>(order);
+        // const createdOrder = await this.orderRepository.create<Order>(order);
+        const createdOrder = await this.masterOrderService.create(order);
+
         // this.createProgress(createdOrder);
         const txnToken = await this.paymentService.createTxnToken(
           {
@@ -84,6 +90,28 @@ export class OrderService {
         );
         return { txnToken, order: createdOrder };
       }
+    
+  }
+
+  async createSupplierOrders(order: OrderDto){
+    const cartDetails = await this.cartDetailsService.findAll({where:{ cartId: order.cartId },include:[{all: true}]});
+    let totalAmount = 0;
+    for (let i = 0; i < cartDetails.length; i++) {
+      const bussiness = _.groupBy(cartDetails[i],'businessId')
+      const businessKeys = Object.keys(bussiness)
+      for (let index = 0; index < businessKeys.length; index++) {
+        for (let j = 0; j < bussiness[businessKeys[index]].length; j++) {
+          const element = bussiness[businessKeys[index]][j]
+          
+         
+        }
+      }
+      if(cartDetails[i].product.availableStock >= cartDetails[i].quantity){
+        totalAmount += cartDetails[i].product.sellingPrice * cartDetails[i].quantity
+      }else{
+        return `${cartDetails[i].product.name}`
+      }
+      } 
     
   }
   async getOrderAmount(cartId){

@@ -4,6 +4,7 @@ import { UserModule } from 'src/core/user/user.module';
 import { AddressModule } from '../address/address.module';
 import { CartDetailsModule } from '../cart-details/cart-details.module';
 import { CartModule } from '../cart/cart.module';
+import { MasterOrderModule } from '../master-order/master-order.module';
 import { PaymentModule } from '../payment/payment.module';
 import { ProductModule } from '../product/product.module';
 import { ProgressModule } from '../progress/progress.module';
@@ -20,6 +21,7 @@ import { OrderService } from './order.service';
     SharedModule,
     ConfigModule,
     ProductModule,
+    MasterOrderModule,
     CartModule,
     CartDetailsModule,
     forwardRef(() => TransactionModule),
