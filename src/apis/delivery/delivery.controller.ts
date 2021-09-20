@@ -44,5 +44,25 @@ export class DeliveryController {
         return this.deliveryService.findById(id);
     }
 
+    @Patch('order/:orderId')
+    async updateById(
+        @Param('orderId', ParseIntPipe) orderId: number,
+        @Body(new ValidationPipe({ skipMissingProperties: true }))  deliveryDto: DeliveryDto,
+    ) {
+        return this.deliveryService.orderAccept(orderId, deliveryDto);
+    }
+
+    @Patch('generate-shipment/:orderId')
+    async generateShipment(
+        @Param('orderId', ParseIntPipe) orderId: number,
+    ) {
+        return this.deliveryService.generateShipment(orderId);
+    }
    
+    @Patch('request-shipment-pickup/:orderId')
+    async requestShipmentPickup(
+        @Param('orderId', ParseIntPipe) orderId: number,
+    ) {
+        return this.deliveryService.requestShipmentPickup(orderId);
+    }
 }

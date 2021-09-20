@@ -10,7 +10,9 @@ import { Collection } from './apis/collection/collection.model';
 import { Color } from './apis/color/color.model';
 import { Comments } from './apis/comments/comments.model';
 import { ContactUs } from './apis/contact-us/contact-us.model';
+import { Delivery } from './apis/delivery/delivery.model';
 import { Invoice } from './apis/invoice/invoice.model';
+import { MasterOrder } from './apis/master-order/master-order.model';
 import { Order } from './apis/order/order.model';
 import { Otp } from './apis/otp/otp.model';
 import { PaymentGateway } from './apis/payment-gateway/payment-gateway.model';
@@ -49,5 +51,7 @@ export const MODELS: ModelCtor<Model<any, any>>[] = [
   Wishlist,
   Catelouge,
   WishlistDetails,
-  ContactUs
+  ContactUs,
+  Delivery,
+  MasterOrder
 ];

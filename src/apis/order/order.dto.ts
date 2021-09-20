@@ -8,7 +8,7 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
-import { OrderStatus } from 'src/common/enums/order.enum';
+// import { OrderStatus } from 'src/common/enums/order.enum';
 
 enum PaymentStatus {
   NONE = 'none',
@@ -53,9 +53,14 @@ export class OrderDto {
   readonly paymentStatus: string;
 
   @IsOptional()
-  @IsEnum(OrderStatus)
+  @IsEnum(Status)
   @ApiProperty()
   readonly status: string;
+
+  @IsOptional()
+  @IsString()
+  @ApiProperty()
+  readonly orderStatus: string;
 
   @IsOptional()
   @IsBoolean()

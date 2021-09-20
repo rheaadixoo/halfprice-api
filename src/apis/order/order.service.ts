@@ -95,21 +95,18 @@ export class OrderService {
 
   async createSupplierOrders(order: OrderDto){
     const cartDetails = await this.cartDetailsService.findAll({where:{ cartId: order.cartId },include:[{all: true}]});
-    let totalAmount = 0;
+    
     for (let i = 0; i < cartDetails.length; i++) {
       const bussiness = _.groupBy(cartDetails[i],'businessId')
       const businessKeys = Object.keys(bussiness)
       for (let index = 0; index < businessKeys.length; index++) {
+        let totalAmount = 0;
         for (let j = 0; j < bussiness[businessKeys[index]].length; j++) {
-          const element = bussiness[businessKeys[index]][j]
-          
-         
+          const cartDetail = bussiness[businessKeys[index]][j]
+            totalAmount += cartDetail.product.sellingPrice * cartDetail.quantity         
         }
-      }
-      if(cartDetails[i].product.availableStock >= cartDetails[i].quantity){
-        totalAmount += cartDetails[i].product.sellingPrice * cartDetails[i].quantity
-      }else{
-        return `${cartDetails[i].product.name}`
+        order.totalAmount = totalAmount
+        await this.create(order)
       }
       } 
     

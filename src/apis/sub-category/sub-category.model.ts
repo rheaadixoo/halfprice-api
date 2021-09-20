@@ -52,7 +52,7 @@ export class SubCategory extends Model<SubCategory> {
   })
   status: 'active' | 'inactive';
 
-  @ForeignKey(() => Category)
+  // @ForeignKey(() => Category)
   @Column({
     type: DataType.INTEGER,
     field: 'category_id',
@@ -60,8 +60,8 @@ export class SubCategory extends Model<SubCategory> {
   })
   categoryId: number;
 
-  @BelongsTo(() => Category, 'categoryId')
-  category: Category;
+  // @BelongsTo(() => Category, 'categoryId')
+  // category: Category;
 
   @ForeignKey(() => User)
   @Column({

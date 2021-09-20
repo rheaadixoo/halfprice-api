@@ -80,12 +80,15 @@ export class Order extends Model<Order> {
   })
   status: 'open' | 'confirmed' | 'in_progress' | 'cancelled' | 'completed';
 
+
   @Column({
-    type: DataType.BOOLEAN,
-    field: 'is_accepted',
-    defaultValue: false,
+    type: DataType.STRING,
+    field: 'order_status',
+    defaultValue: 'pending',
+    allowNull: true,
   })
-  isAccepted: boolean;
+  orderStatus: 'pending' | 'accepted';
+
 
   @Column({
     type: DataType.INTEGER,

@@ -74,6 +74,16 @@ export class MasterOrder extends Model<MasterOrder> {
   })
   status: 'open' | 'confirmed' | 'in_progress' | 'cancelled' | 'completed';
 
+
+  @Column({
+    type: DataType.STRING,
+    field: 'order_status',
+    defaultValue: 'pending',
+    allowNull: true,
+  })
+  orderStatus: 'pending' | 'accepted';
+
+  
   @Column({
     type: DataType.BOOLEAN,
     field: 'is_accepted',

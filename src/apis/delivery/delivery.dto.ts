@@ -6,7 +6,12 @@ import {
 
 export class DeliveryDto {
 
-    
+
+@IsOptional()
+@IsNumber()
+@ApiProperty()
+readonly orderId: number;
+
 @IsOptional()
 @IsNumber()
 @ApiProperty()

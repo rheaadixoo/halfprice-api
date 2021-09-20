@@ -116,7 +116,7 @@ export class CanAwsService {
         // Create Nodemailer Transporter Using SES
         const transporter = nodemailer.createTransport({ SES: SES });
         // Send & Sent Response
-        resolve(await transporter.sendMail(params));
+        // resolve(await transporter.sendMail(params));
       } catch (error) {
         // Handle Error
         reject(new Error(error.message));
