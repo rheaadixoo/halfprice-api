@@ -95,7 +95,7 @@ export class Product extends Model<Product> {
   @Column({
     type: DataType.STRING,
     field: 'brand_name',
-    allowNull: false,
+    allowNull: true,
   })
   brandName: string;
 
