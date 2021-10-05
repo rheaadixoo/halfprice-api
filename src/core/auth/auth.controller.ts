@@ -49,6 +49,15 @@ export class AuthController {
     return { message: `Otp sent successfully on ${mobile}!` };
   }
 
+  @Post('register/users')
+  @HttpCode(200)
+  async getMobileOtpWithUser(
+    @Body(ValidationPipe) otpDto: GenerateMobileOtpDto,
+  ): Promise<RecoverResponseDto> {
+    const { mobile } = otpDto;
+    return this.authService.getMobileOtpWithUser(mobile);
+  }
+
   @Post('admin/generate-otp')
   @HttpCode(200)
   async generateInternalMobileOtp(
@@ -59,15 +68,15 @@ export class AuthController {
     return { message: `Otp sent successfully on ${mobile}!` };
   }
 
-  @Post('supplier/generate-otp')
-  @HttpCode(200)
-  async generateSupplierMobileOtp(
-    @Body(ValidationPipe) otpDto: GenerateMobileOtpDto,
-  ): Promise<RecoverResponseDto> {
-    const { mobile } = otpDto;
-    await this.authService.getSupplierMobileOtp(mobile);
-    return { message: `Otp sent successfully on ${mobile}!` };
-  }
+  // @Post('supplier/generate-otp')
+  // @HttpCode(200)
+  // async generateSupplierMobileOtp(
+  //   @Body(ValidationPipe) otpDto: GenerateMobileOtpDto,
+  // ): Promise<RecoverResponseDto> {
+  //   const { mobile } = otpDto;
+  //   await this.authService.getSupplierMobileOtp(mobile);
+  //   return { message: `Otp sent successfully on ${mobile}!` };
+  // }
 
   @Post('login/mobile')
   @HttpCode(200)

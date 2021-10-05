@@ -133,7 +133,7 @@ export class AuthService {
    * @return string
    */
   async getMobileOtp(mobile: string): Promise<string> {
-    const user = await this.userService.findOne({ where: { mobile } });
+    let user = await this.userService.findOne({ where: { mobile } });
     if (!user) {
       throw new ForbiddenException();
     }
@@ -152,6 +152,37 @@ export class AuthService {
     return loginOtp;
   }
 
+
+
+    /**
+   *
+   * @param mobile : string
+   *
+   * @return string
+   */
+     async getMobileOtpWithUser(mobile: string): Promise<any> {
+      let user = await this.userService.findOne({ where: { mobile } });
+      if (!user) {
+        const userData :any  = {
+          mobile
+        }
+        user = await this.userService.create(userData)
+        // throw new ForbiddenException();
+      }
+      const {loginOtp , otpSecret} = this.otpService.generateOtp();
+      await this.userService.updateById(user.id, {
+        loginOtp:'1234',
+        otpSecret
+      });
+      this.smsService.sendSms({
+        mobile: mobile,
+        message: `${1234} is your Occupi verification code. Now let's get your home move-in ready!`,
+        route: 'api',
+        type: 'otp',
+      });
+  
+      return user;
+    }
   async getInternalMobileOtp(mobile: string): Promise<string> {
     const user = await this.userService.findOne({ where: { mobile , type:'internal'} });
     if (!user) {
@@ -172,32 +203,32 @@ export class AuthService {
     return loginOtp;
   }
 
-  async getSupplierMobileOtp(mobile: string): Promise<string> {
-    const user = await this.userService.findOne({ where: { mobile , 
-      [Op.or]:[{
-        type:{ [Op.eq] : 'internal'}
-    },
-    {
-      type:{ [Op.eq] : 'supplier'}
-  }
-  ]} });
-    if (!user) {
-      throw new ForbiddenException();
-    }
-    const {loginOtp , otpSecret} = this.otpService.generateOtp();
-    await this.userService.updateById(user.id, {
-      loginOtp:'1234',
-      otpSecret
-    });
-    this.smsService.sendSms({
-      mobile: mobile,
-      message: `${1234} is your Occupi verification code. Now let's get your home move-in ready!`,
-      route: 'api',
-      type: 'otp',
-    });
+  // async getSupplierMobileOtp(mobile: string): Promise<string> {
+  //   const user = await this.userService.findOne({ where: { mobile , 
+  //     [Op.or]:[{
+  //       type:{ [Op.eq] : 'internal'}
+  //   },
+  //   {
+  //     type:{ [Op.eq] : 'supplier'}
+  // }
+  // ]} });
+  //   if (!user) {
+  //     throw new ForbiddenException();
+  //   }
+  //   const {loginOtp , otpSecret} = this.otpService.generateOtp();
+  //   await this.userService.updateById(user.id, {
+  //     loginOtp:'1234',
+  //     otpSecret
+  //   });
+  //   this.smsService.sendSms({
+  //     mobile: mobile,
+  //     message: `${1234} is your Occupi verification code. Now let's get your home move-in ready!`,
+  //     route: 'api',
+  //     type: 'otp',
+  //   });
 
-    return loginOtp;
-  }
+  //   return loginOtp;
+  // }
   /**
    *
    * @param token : string

@@ -28,7 +28,7 @@ export class UserService {
     this.canLogger.setContext('UserService');
   }
 
-  async create(user: UserDto): Promise<UserDto> {
+  async create(user: UserDto): Promise<any> {
     if ('type' in user && (user.type == 'internal' || user.type == 'supplier') && user.name) {
       user.firstName = user.name.split(' ')[0];
       user.middleName =

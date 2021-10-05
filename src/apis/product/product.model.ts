@@ -128,15 +128,27 @@ export class Product extends Model<Product> {
   productStatus: 'pending' | 'approved' | 'rejected';
 
 
-  @ForeignKey(() => SubCategory)
+  // @ForeignKey(() => SubCategory)
+  // @Column({
+  //   type: DataType.INTEGER,
+  //   field: 'sub_category_id',
+  // })
+  // subCategoryId: number;
+
+  // @BelongsTo(() => SubCategory, 'subCategoryId')
+  // subCategory: SubCategory;
+
+  
+  @ForeignKey(() => Category)
   @Column({
     type: DataType.INTEGER,
-    field: 'sub_category_id',
+    field: 'category_id',
   })
-  subCategoryId: number;
+  categoryId: number;
 
-  @BelongsTo(() => SubCategory, 'subCategoryId')
-  subCategory: SubCategory;
+  @BelongsTo(() => Category, 'categoryId')
+  category: Category;
+
 
   @ForeignKey(() => Brand)
   @Column({
